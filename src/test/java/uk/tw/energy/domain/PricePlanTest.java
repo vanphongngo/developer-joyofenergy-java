@@ -25,7 +25,7 @@ public class PricePlanTest {
 
   @Test
   public void shouldReturnTheBasePriceGivenAnOrdinaryDateTime() throws Exception {
-    LocalDateTime normalDateTime = LocalDateTime.of(2017, Month.AUGUST, 31, 12, 0, 0);
+    LocalDateTime normalDateTime = LocalDateTime.of(2024, Month.JUNE, 6, 12, 0, 0);
     PricePlan.PeakTimeMultiplier peakTimeMultiplier =
         new PricePlan.PeakTimeMultiplier(DayOfWeek.WEDNESDAY, BigDecimal.TEN);
     PricePlan pricePlan =
@@ -38,7 +38,7 @@ public class PricePlanTest {
 
   @Test
   public void shouldReturnAnExceptionPriceGivenExceptionalDateTime() throws Exception {
-    LocalDateTime exceptionalDateTime = LocalDateTime.of(2017, Month.AUGUST, 30, 23, 0, 0);
+    LocalDateTime exceptionalDateTime = LocalDateTime.of(2024, Month.JUNE, 5, 5, 0, 0);
     PricePlan.PeakTimeMultiplier peakTimeMultiplier =
         new PricePlan.PeakTimeMultiplier(DayOfWeek.WEDNESDAY, BigDecimal.TEN);
     PricePlan pricePlan =

@@ -9,6 +9,7 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import uk.tw.energy.builders.MeterReadingsBuilder;
 import uk.tw.energy.domain.ElectricityReading;
 import uk.tw.energy.domain.MeterReadings;
@@ -94,5 +95,17 @@ public class MeterReadingControllerTest {
   public void givenMeterIdThatIsNotRecognisedShouldReturnNotFound() {
     assertThat(meterReadingController.readReadings(SMART_METER_ID).getStatusCode())
         .isEqualTo(HttpStatus.NOT_FOUND);
+  }
+
+  @Test
+  public void givenMeterIdThatIsRecognisedShouldReturnReadings() {
+    MeterReadings meterReadings =
+            new MeterReadingsBuilder()
+                    .setSmartMeterId(SMART_METER_ID)
+                    .generateElectricityReadings()
+                    .build();
+
+    meterReadingController.storeReadings(meterReadings);
+    assertThat(meterReadingController.readReadings(SMART_METER_ID).getBody()).isEqualTo(meterReadings.electricityReadings());
   }
 }
