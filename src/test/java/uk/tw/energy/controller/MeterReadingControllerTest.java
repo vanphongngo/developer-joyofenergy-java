@@ -10,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.TestPropertySource;
 import uk.tw.energy.builders.MeterReadingsBuilder;
 import uk.tw.energy.domain.ElectricityReading;
 import uk.tw.energy.domain.MeterReadings;
@@ -108,4 +109,12 @@ public class MeterReadingControllerTest {
     meterReadingController.storeReadings(meterReadings);
     assertThat(meterReadingController.readReadings(SMART_METER_ID).getBody()).isEqualTo(meterReadings.electricityReadings());
   }
+
+  @Test
+  public void givenEmptySmartMeterIdShouldReturnErrorResponse() {
+    MeterReadings meterReadings = new MeterReadings("", Collections.emptyList());
+    assertThat(meterReadingController.storeReadings(meterReadings).getStatusCode())
+            .isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR);
+  }
+
 }

@@ -46,7 +46,7 @@ public class SeedingApplicationDataConfiguration {
     smartMeterToPricePlanAccounts()
         .keySet()
         .forEach(
-            smartMeterId -> readings.put(smartMeterId, electricityReadingsGenerator.generate(20)));
+            smartMeterId -> readings.put(smartMeterId, electricityReadingsGenerator.generate(500)));
     return readings;
   }
 
